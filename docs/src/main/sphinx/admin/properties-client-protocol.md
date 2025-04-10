@@ -15,7 +15,7 @@ The following properties are related to the [](protocol-spooling).
 
 Enable the support for the client [](protocol-spooling). The protocol is used if
 client drivers and applications request usage, otherwise the direct protocol is
-used automatically.
+used automatically. The equivalent session property is `spooling_protocol_enabled`.
 
 ### `protocol.spooling.shared-secret-key`
 
@@ -154,11 +154,14 @@ Examples:
 * `s3://my-spooling-bucket/my-segments/`
 
 :::{caution}
-When using the same object storage for spooling from multiple Trino clusters,
-you must use separate locations for each cluster. For example:
+The specified object storage location must not be used for spooling for another
+Trino cluster or any object storage catalog. When using the same object storage
+for multiple services, you must use separate locations for each one. For
+example:
 
-* `s3://my-spooling-bucket/my-segments/cluster1`
-* `s3://my-spooling-bucket/my-segments/cluster2`
+* `s3://my-spooling-bucket/my-segments/cluster1-spooling`
+* `s3://my-spooling-bucket/my-segments/cluster2-spooling`
+* `s3://my-spooling-bucket/my-segments/iceberg-catalog`
 :::
 
 ### `fs.segment.ttl`
